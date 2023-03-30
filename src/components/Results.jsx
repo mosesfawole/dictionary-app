@@ -58,7 +58,38 @@ const Results = () => {
               </div>
 
               <div className="">
-                <div></div>
+                <div>
+                  {data.meanings.map((meaning, index) => (
+                    <div className="" key={index}>
+                      <h2>{meaning.partOfSpeech}</h2>
+                      <ul>
+                        {meaning.definitions.map((definition, index) => (
+                          <li key={index}>
+                            <p>{definition.definition}</p>
+                            <p>{definition.example}</p>
+
+                            <div>
+                              {meaning.synonyms &&
+                                meaning.synonyms.length !== 0 && (
+                                  <p>Synonyms: {meaning.synonyms.join(", ")}</p>
+                                )}
+                              {meaning.antonyms &&
+                                meaning.antonyms.length !== 0 && (
+                                  <p>Antonyms: {meaning.antonyms.join(", ")}</p>
+                                )}
+                            </div>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  ))}
+                </div>
+              </div>
+              <div className="">
+                Source:{" "}
+                <a className="" href={data.sourceUrls[0]}>
+                  {data.sourceUrls[0]}
+                </a>
               </div>
             </div>
           )}
