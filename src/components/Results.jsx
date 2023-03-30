@@ -6,6 +6,7 @@ const Results = () => {
   const [data, setData] = useState(null);
   const [searchTerm, setSearchTerm] = useState("");
   const [error, setError] = useState("");
+  const [isPlay, setIsPlay] = useState(false);
   const [loading, setLoading] = useState(false);
 
   const handleSubmit = (e) => {
@@ -19,6 +20,11 @@ const Results = () => {
       .catch((error) => {
         setError(error);
       });
+  };
+
+  const playAudio = () => {
+    let audio = new Audio(data.phonetics[0].audio);
+    audio.play();
   };
 
   return (
@@ -42,9 +48,18 @@ const Results = () => {
           {error}
           {data && (
             <div className="">
-              <h1 className="text-6xl font-bold"> {data.word}</h1>
-              <p>{data.phonetics[1].text}</p>
-              <audio src={data.phonetics[1].audio}></audio>
+              <div className="top">
+                <h1 className="text-6xl font-bold"> {data.word}</h1>
+                <p>{data.phonetics[1].text}</p>
+
+                <button onClick={playAudio}>
+                  <img src={Play} alt="play" />
+                </button>
+              </div>
+
+              <div className="">
+                <div></div>
+              </div>
             </div>
           )}
         </div>
