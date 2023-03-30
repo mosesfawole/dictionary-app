@@ -52,10 +52,11 @@ const Results = () => {
               <div className="top">
                 <h1 className="text-6xl font-bold"> {data.word}</h1>
                 <p>{data.phonetics[0].text}</p>
-
-                <button onClick={playAudio}>
-                  <img src={Play} alt="play" />
-                </button>
+                {data.phonetics[0].audio && (
+                  <button onClick={playAudio}>
+                    <img src={Play} alt="play" />
+                  </button>
+                )}
               </div>
 
               <div className="">
