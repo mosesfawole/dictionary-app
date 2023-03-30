@@ -130,7 +130,11 @@ const Results = () => {
                         <div className="synonyms">
                           {meaning.synonyms && meaning.synonyms.length > 0 && (
                             <span>
-                              <h4 className="text-2xl leading-8"> Synonyms</h4>:
+                              <h4 className="text-2gitxl leading-8">
+                                {" "}
+                                Synonyms
+                              </h4>
+                              :
                               <a className="text-2xl leading-8 text-[#a445ed]">
                                 {meaning.synonyms.join(", ")}
                               </a>
