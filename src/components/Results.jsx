@@ -10,14 +10,25 @@ const Results = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+
+    setLoading(true);
     Axios.get(`https://api.dictionaryapi.dev/api/v2/entries/en/${searchTerm}`)
       .then((response) => {
         setData(response.data);
-        console.log(response.data);
+        setLoading(false);
         setError("");
+        searchTerm("");
       })
       .catch((error) => {
-        setError(error);
+        setLoading(false);
+        console.error(error);
+        setError({
+          emoji: "😕",
+          title: "No Definitions Found",
+          message: `Sorry pal, we couldn't find definitions for the word ${searchTerm} you were looking for.`,
+          resolution:
+            "You can try the search again at later time or head to the web instead.",
+        });
       });
   };
 
@@ -45,7 +56,16 @@ const Results = () => {
           />
         </form>
         <div className="result">
-          {error}
+          {loading && <div className="">Loading ...</div>}
+
+          {!loading && error && (
+            <div className="error">
+              <p>{error.emoji}</p>
+              <h2>{error.title}</h2>
+              <p>{error.message}</p>
+              <p>{error.resolution}</p>
+            </div>
+          )}
           {data.slice(0, 1).map((result, index) => {
             return (
               <div className="" key={index}>
