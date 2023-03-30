@@ -5,7 +5,7 @@ import ArrowDown from "../assets/icon-arrow-down.svg";
 import ArrowUp from "../assets/icon-arrow-up.svg";
 const Header = () => {
   const [selectedFont, setSelectedFont] = useState("Sans-serif");
-  const [modal, setModal] = useState(true);
+  const [modal, setModal] = useState(false);
 
   return (
     <div>
