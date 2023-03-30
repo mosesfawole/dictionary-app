@@ -17,7 +17,7 @@ const Results = () => {
         setData(response.data);
         setLoading(false);
         setError("");
-        searchTerm("");
+        setSearchTerm("");
       })
       .catch((error) => {
         setLoading(false);
@@ -69,22 +69,28 @@ const Results = () => {
           {data.slice(0, 1).map((result, index) => {
             return (
               <div className="" key={index}>
-                <div className="header">
-                  <h2>{result.word}</h2>
-                  {result.phonetics.map(
-                    (phonetic, index) =>
-                      phonetic.audio && (
-                        <button key={index}>
-                          <img
-                            className="cursor-pointer"
-                            key={index}
-                            src={Play}
-                            alt="play-icon"
-                            onClick={() => playAudio(phonetic.audio)}
-                          />
-                        </button>
-                      )
-                  )}
+                <div className="header flex justify-center items-center ">
+                  <div className="flex-1">
+                    <h2 className="font-bold md:text-8xl md:leading-[7.7rem]">
+                      {result.word}
+                    </h2>
+                  </div>
+                  <div key={index} className="flex gap-4">
+                    {result.phonetics.map(
+                      (phonetic, index) =>
+                        phonetic.audio && (
+                          <button>
+                            <img
+                              className="cursor-pointer"
+                              key={index}
+                              src={Play}
+                              alt="play-icon"
+                              onClick={() => playAudio(phonetic.audio)}
+                            />
+                          </button>
+                        )
+                    )}
+                  </div>
 
                   <h4>{result.phonetic}</h4>
                 </div>
@@ -93,23 +99,29 @@ const Results = () => {
                     return (
                       <div className="" key={index}>
                         <div className="speech">
-                          <h3>{meaning.parOfSpeech}</h3>
+                          <p className="md:text-4xl text-2xl font-bold italic">
+                            {meaning.partOfSpeech}
+                          </p>
                           <div className="line"></div>
                         </div>
                         <div className="definitions">
-                          <h4>Meaning</h4>
+                          <h4 className="text-[#757575]  text-xl ">Meaning</h4>
                         </div>
                         {meaning.definitions
                           .slice(0, 3)
                           .map((definition, index) => {
                             return (
                               <div className="" key={index}>
-                                <ul>
-                                  <li>{definition.definition}</li>
+                                <ul className="list-disc ">
+                                  <li className="text-xl text-[#2d2d2d]">
+                                    {definition.definition}
+                                  </li>
                                 </ul>
                                 {definition.example && (
                                   <div className="example">
-                                    <p>"{definition.example}"</p>
+                                    <p className="text-[2rem] leading-8">
+                                      "{definition.example}"
+                                    </p>
                                   </div>
                                 )}
                               </div>
@@ -118,7 +130,10 @@ const Results = () => {
                         <div className="synonyms">
                           {meaning.synonyms && meaning.synonyms.length > 0 && (
                             <span>
-                              <h4>Synonyms</h4>: {meaning.synonyms.join(", ")}
+                              <h4 className="text-2xl leading-8"> Synonyms</h4>:
+                              <a className="text-2xl leading-8 text-[#a445ed]">
+                                {meaning.synonyms.join(", ")}
+                              </a>
                             </span>
                           )}
 
