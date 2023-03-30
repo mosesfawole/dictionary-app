@@ -11,7 +11,7 @@ const Results = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    Axios.get(`https://api.dictionaryapi.dev/api/v2/entries/en/hello`)
+    Axios.get(`https://api.dictionaryapi.dev/api/v2/entries/en/${searchTerm}`)
       .then((response) => {
         setError("");
         console.log(response.data[0]);
@@ -35,6 +35,7 @@ const Results = () => {
             className="h-16 w-full text-xl font-bold  p-4 text-[#2d2d2d] rounded-2xl outline-1 outline-[#a445ed] bg-[#f4f4f4]"
             placeholder="Search for any word ..."
             type="text"
+            value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
           />
           <img
@@ -50,7 +51,7 @@ const Results = () => {
             <div className="">
               <div className="top">
                 <h1 className="text-6xl font-bold"> {data.word}</h1>
-                <p>{data.phonetics[1].text}</p>
+                <p>{data.phonetics[0].text}</p>
 
                 <button onClick={playAudio}>
                   <img src={Play} alt="play" />
