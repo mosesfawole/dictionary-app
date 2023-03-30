@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import Search from "../assets/icon-search.svg";
+import Play from "../assets/icon-play.svg";
 import Axios from "axios";
 const Results = () => {
   const [data, setData] = useState(null);
@@ -39,7 +40,13 @@ const Results = () => {
         </form>
         <div className="result">
           {error}
-          {data && <p>{data.word}</p>}
+          {data && (
+            <div className="">
+              <h1 className="text-6xl font-bold"> {data.word}</h1>
+              <p>{data.phonetics[1].text}</p>
+              <audio src={data.phonetics[1].audio}></audio>
+            </div>
+          )}
         </div>
       </div>
     </div>
